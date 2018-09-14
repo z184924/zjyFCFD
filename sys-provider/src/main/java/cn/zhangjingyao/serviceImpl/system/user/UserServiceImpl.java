@@ -1,7 +1,7 @@
-package cn.zhangjingyao.serviceImp.system.user;
+package cn.zhangjingyao.serviceImpl.system.user;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import cn.zhangjingyao.dao.DaoSupport;
+import cn.zhangjingyao.dao.DaoImpl;
 import cn.zhangjingyao.entity.system.User;
 import cn.zhangjingyao.service.system.user.UserService;
 import cn.zhangjingyao.util.PageData;
@@ -9,15 +9,14 @@ import cn.zhangjingyao.util.PageData;
 import javax.annotation.Resource;
 
 @Service(interfaceClass = UserService.class)
-public class UserServiceImp implements UserService {
+public class UserServiceImpl implements UserService {
 	
-	@Resource(name = "daoSupport")
-	private DaoSupport dao;
+	@Resource
+	private DaoImpl dao;
 
 	/*
 	 * 通过用户名密码获取数据
 	 */
-	@Override
 	public User loginUser(PageData pd)throws Exception{
 		return (User)dao.findForObject("UserMapper.loginUser", pd);
 	}

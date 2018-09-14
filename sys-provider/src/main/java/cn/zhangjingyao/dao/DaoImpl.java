@@ -9,8 +9,7 @@ import org.springframework.stereotype.Repository;
 import javax.annotation.Resource;
 import java.util.List;
 
-@Repository("daoSupport")
-public class DaoSupport implements DAO {
+public class DaoImpl implements DAO {
 
 	@Resource(name = "sqlSessionTemplate")
 	private SqlSessionTemplate sqlSessionTemplate;
@@ -22,7 +21,6 @@ public class DaoSupport implements DAO {
 	 * @return
 	 * @throws Exception
 	 */
-	@Override
     public Object save(String str, Object obj) throws Exception {
 		return sqlSessionTemplate.insert(str, obj);
 	}
@@ -45,7 +43,6 @@ public class DaoSupport implements DAO {
 	 * @return
 	 * @throws Exception
 	 */
-	@Override
     public Object update(String str, Object obj) throws Exception {
 		return sqlSessionTemplate.update(str, obj);
 	}
@@ -93,7 +90,6 @@ public class DaoSupport implements DAO {
 	 * @return
 	 * @throws Exception
 	 */
-	@Override
     public Object delete(String str, Object obj) throws Exception {
 		return sqlSessionTemplate.delete(str, obj);
 	}
@@ -105,7 +101,6 @@ public class DaoSupport implements DAO {
 	 * @return
 	 * @throws Exception
 	 */
-	@Override
     public Object findForObject(String str, Object obj) throws Exception {
 		return sqlSessionTemplate.selectOne(str, obj);
 	}
@@ -117,17 +112,14 @@ public class DaoSupport implements DAO {
 	 * @return
 	 * @throws Exception
 	 */
-	@Override
     public Object findForList(String str, Object obj) throws Exception {
 		return sqlSessionTemplate.selectList(str, obj);
 	}
-	
-	@Override
+
     public Object findForMap(String str, Object obj, String key, String value) throws Exception {
 		return sqlSessionTemplate.selectMap(str, obj, key);
 	}
 
-	@Override
 	public void batchInsert(String str, List objs)
 	  {
 	    SqlSession sqlSession = this.sqlSessionTemplate.getSqlSessionFactory().openSession(ExecutorType.BATCH, false);

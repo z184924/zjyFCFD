@@ -1,4 +1,19 @@
 spring:
+#dubbo配置
+  dubbo:
+  #定义了提供方应用信息，用于计算依赖关系；在 dubbo-admin 或 dubbo-monitor 会显示这个名字，方便辨识
+    application:
+      name: sys-provider
+      owner: programmer
+      organization: dubbox
+  #使用 zookeeper 注册中心暴露服务，注意要先开启 zookeeper
+    registry:
+      address: zookeeper://localhost:2181
+  #用dubbo协议在20880端口暴露服务
+    protocol:
+      name: dubbo
+      port: 20880
+    scan: cn.zhangjingyao.serviceImp
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
@@ -29,18 +44,4 @@ spring:
 　  connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
     #合并多个DruidDataSource的监控数据
 　　useGlobalDataSourceStat: true
-#dubbo配置
-dubbo:
-#定义了提供方应用信息，用于计算依赖关系；在 dubbo-admin 或 dubbo-monitor 会显示这个名字，方便辨识
-  application:
-    name: sys-provider
-    owner: programmer
-    organization: dubbox
-#使用 zookeeper 注册中心暴露服务，注意要先开启 zookeeper
-  registry:
-    address: zookeeper://localhost:2181
-#用dubbo协议在20880端口暴露服务
-  protocol:
-    name: dubbo
-    port: 20880
-  scan: cn.zhangjingyao.serviceImp
+
