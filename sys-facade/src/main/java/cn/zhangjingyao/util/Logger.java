@@ -3,13 +3,13 @@ package cn.zhangjingyao.util;
 
 public class Logger {
 
-	private org.apache.log4j.Logger logger;
+	private org.apache.logging.log4j.Logger logger;
 
 	
 	/**
 	 * 构造方法，初始化Log4j的日志对象
 	 */
-	private Logger(org.apache.log4j.Logger log4jLogger) {
+	private Logger(org.apache.logging.log4j.Logger log4jLogger) {
 		logger = log4jLogger;
 	}
 
@@ -21,7 +21,7 @@ public class Logger {
 	 * @return Logger对象
 	 */
 	public static Logger getLogger(Class classObject) {
-		return new Logger(org.apache.log4j.Logger.getLogger(classObject));
+		return new Logger(org.apache.logging.log4j.LogManager.getLogger(classObject));
 	}
 
 	/**
@@ -32,7 +32,7 @@ public class Logger {
 	 * @return Logger对象
 	 */
 	public static Logger getLogger(String loggerName) {
-		return new Logger(org.apache.log4j.Logger.getLogger(loggerName));
+		return new Logger(org.apache.logging.log4j.LogManager.getLogger(loggerName));
 	}
 
 	public void debug(Object object) {
@@ -75,7 +75,7 @@ public class Logger {
 		return logger.getName();
 	}
 
-	public org.apache.log4j.Logger getLog4jLogger() {
+	public org.apache.logging.log4j.Logger getLog4jLogger() {
 		return logger;
 	}
 

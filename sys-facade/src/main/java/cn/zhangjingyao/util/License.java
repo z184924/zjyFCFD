@@ -1,7 +1,5 @@
 package cn.zhangjingyao.util;
 
-import org.apache.log4j.Logger;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
@@ -30,9 +28,7 @@ public final class License {
 	private License() {
 		prop = new Properties();
 		try {
-			if (LOGGER.isInfoEnabled()) {
-				LOGGER.info("parameter config init");
-			}
+			LOGGER.info("parameter config init");
 			InputStream inputStream=this.getClass().getResourceAsStream(PARAMETER_FILE);
 			prop.load(inputStream);
 		} catch (IOException e) {

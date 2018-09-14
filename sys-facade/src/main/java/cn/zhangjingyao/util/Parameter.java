@@ -1,6 +1,6 @@
 package cn.zhangjingyao.util;
 
-import org.apache.log4j.Logger;
+import cn.zhangjingyao.util.Logger;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -26,9 +26,7 @@ public final class Parameter {
 	private Parameter() {
 		prop = new Properties();
 		try {
-			if (LOGGER.isInfoEnabled()) {
-				LOGGER.info("parameter config init");
-			}
+			LOGGER.info("parameter config init");
 			prop.load(this.getClass().getResourceAsStream(PARAMETER_FILE));
 		} catch (IOException e) {
 			LOGGER.error(e.getMessage());

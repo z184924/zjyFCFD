@@ -13,7 +13,6 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
-import org.apache.log4j.Logger;
 
 import java.io.BufferedReader;
 import java.io.IOException;
