@@ -17,6 +17,7 @@ public class UserServiceImpl implements UserService {
 	/*
 	 * 通过用户名密码获取数据
 	 */
+	@Override
 	public User loginUser(PageData pd)throws Exception{
 		return (User)dao.findForObject("UserMapper.loginUser", pd);
 	}

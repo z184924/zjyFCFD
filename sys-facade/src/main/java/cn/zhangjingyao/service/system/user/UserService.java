@@ -4,7 +4,7 @@ import cn.zhangjingyao.entity.system.User;
 import cn.zhangjingyao.util.PageData;
 import org.springframework.stereotype.Service;
 
-@Service("userService")
+@Service
 public interface UserService {
 
 	/*

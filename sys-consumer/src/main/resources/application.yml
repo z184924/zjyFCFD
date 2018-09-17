@@ -7,4 +7,4 @@ dubbo:
     organization: dubbox
   registry:
     address: zookeeper://localhost:2181
-  scan: cn.zhangjingyao.UserService
+  scan: cn.zhangjingyao.controller

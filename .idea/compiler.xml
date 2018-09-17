@@ -12,10 +12,10 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="sys-consumer" target="1.5" />
-      <module name="sys-facade" target="1.5" />
-      <module name="sys-provider" target="1.5" />
-      <module name="zjyFFD" target="1.5" />
+      <module name="sys-consumer" target="1.8" />
+      <module name="sys-facade" target="1.8" />
+      <module name="sys-provider" target="1.8" />
+      <module name="zjyFFD" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
