@@ -1,7 +1,7 @@
 package cn.zhangjingyao.service.system.user;
 
 import cn.zhangjingyao.entity.system.User;
-import cn.zhangjingyao.util.PageData;
+import cn.zhangjingyao.entity.PageData;
 import org.springframework.stereotype.Service;
 
 @Service

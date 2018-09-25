@@ -1,7 +1,6 @@
 package cn.zhangjingyao.entity;
 
 import cn.zhangjingyao.util.Const;
-import cn.zhangjingyao.util.PageData;
 import cn.zhangjingyao.util.Tools;
 
 import java.io.Serializable;

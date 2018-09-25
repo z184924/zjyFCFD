@@ -1,5 +1,7 @@
 package cn.zhangjingyao.util;
 
+import cn.zhangjingyao.entity.PageData;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;

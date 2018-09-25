@@ -16,7 +16,6 @@ import javax.sql.DataSource;
  */
 
 @Configuration
-@PropertySource(value = "classpath:druid.properties")
 public class DruidConfiguration {
 
     @Bean

@@ -4,14 +4,15 @@ import com.alibaba.dubbo.config.annotation.Service;
 import cn.zhangjingyao.dao.DaoImpl;
 import cn.zhangjingyao.entity.system.User;
 import cn.zhangjingyao.service.system.user.UserService;
-import cn.zhangjingyao.util.PageData;
+import cn.zhangjingyao.entity.PageData;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.annotation.Resource;
-
-@Service(interfaceClass = UserService.class)
+//@Service(interfaceClass = UserService.class)
+@Service
+@org.springframework.stereotype.Service
 public class UserServiceImpl implements UserService {
 	
-	@Resource
+	@Autowired
 	private DaoImpl dao;
 
 	/*

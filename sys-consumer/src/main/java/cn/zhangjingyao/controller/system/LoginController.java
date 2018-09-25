@@ -4,8 +4,7 @@ package cn.zhangjingyao.controller.system;
 import cn.zhangjingyao.controller.base.BaseController;
 import cn.zhangjingyao.entity.system.User;
 import cn.zhangjingyao.service.system.user.UserService;
-import cn.zhangjingyao.util.License;
-import cn.zhangjingyao.util.PageData;
+import cn.zhangjingyao.entity.PageData;
 import cn.zhangjingyao.util.Token;
 import cn.zhangjingyao.util.TokenPool;
 import com.alibaba.dubbo.config.annotation.Reference;
@@ -32,9 +31,9 @@ public class LoginController extends BaseController {
 	@RequestMapping(value="/login" ,produces="application/json;charset=UTF-8")
 	@ResponseBody
 	public Object login()throws Exception{
-		if(License.licenseCheck()==false){
-			return	this.jsonContent("error","license error");
-		}
+//		if(License.licenseCheck()==false){
+//			return	this.jsonContent("error","license error");
+//		}
 		PageData pd = this.getPageData();
 		String password = new SimpleHash("SHA-1", pd.getString("account"), pd.getString("password")).toString();	//密码加密
 		PageData searchPd= new PageData();

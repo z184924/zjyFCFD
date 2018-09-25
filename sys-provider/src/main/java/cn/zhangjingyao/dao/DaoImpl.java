@@ -4,11 +4,13 @@ import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
 import java.util.List;
 
+@Component
 public class DaoImpl implements DAO {
 
 	@Resource(name = "sqlSessionTemplate")
@@ -21,7 +23,8 @@ public class DaoImpl implements DAO {
 	 * @return
 	 * @throws Exception
 	 */
-    public Object save(String str, Object obj) throws Exception {
+    @Override
+	public Object save(String str, Object obj) throws Exception {
 		return sqlSessionTemplate.insert(str, obj);
 	}
 	
@@ -43,7 +46,8 @@ public class DaoImpl implements DAO {
 	 * @return
 	 * @throws Exception
 	 */
-    public Object update(String str, Object obj) throws Exception {
+    @Override
+	public Object update(String str, Object obj) throws Exception {
 		return sqlSessionTemplate.update(str, obj);
 	}
 
@@ -90,7 +94,8 @@ public class DaoImpl implements DAO {
 	 * @return
 	 * @throws Exception
 	 */
-    public Object delete(String str, Object obj) throws Exception {
+    @Override
+	public Object delete(String str, Object obj) throws Exception {
 		return sqlSessionTemplate.delete(str, obj);
 	}
 	 
@@ -101,7 +106,8 @@ public class DaoImpl implements DAO {
 	 * @return
 	 * @throws Exception
 	 */
-    public Object findForObject(String str, Object obj) throws Exception {
+    @Override
+	public Object findForObject(String str, Object obj) throws Exception {
 		return sqlSessionTemplate.selectOne(str, obj);
 	}
 
@@ -112,14 +118,17 @@ public class DaoImpl implements DAO {
 	 * @return
 	 * @throws Exception
 	 */
-    public Object findForList(String str, Object obj) throws Exception {
+    @Override
+	public Object findForList(String str, Object obj) throws Exception {
 		return sqlSessionTemplate.selectList(str, obj);
 	}
 
-    public Object findForMap(String str, Object obj, String key, String value) throws Exception {
+    @Override
+	public Object findForMap(String str, Object obj, String key, String value) throws Exception {
 		return sqlSessionTemplate.selectMap(str, obj, key);
 	}
 
+	@Override
 	public void batchInsert(String str, List objs)
 	  {
 	    SqlSession sqlSession = this.sqlSessionTemplate.getSqlSessionFactory().openSession(ExecutorType.BATCH, false);

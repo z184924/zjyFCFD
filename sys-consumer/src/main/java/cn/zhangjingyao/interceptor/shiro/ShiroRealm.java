@@ -1,7 +1,7 @@
 package cn.zhangjingyao.interceptor.shiro;
 
 
-import cn.zhangjingyao.util.PageData;
+import cn.zhangjingyao.entity.PageData;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;

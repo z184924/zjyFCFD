@@ -1,5 +1,6 @@
 package cn.zhangjingyao.util;
 
+import cn.zhangjingyao.entity.PageData;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.NameValuePair;
