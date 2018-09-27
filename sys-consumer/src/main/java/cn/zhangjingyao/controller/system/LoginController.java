@@ -50,8 +50,7 @@ public class LoginController extends BaseController {
 		resultPD.put("token", token.getToken());
 		System.out.println("addToken:"+token.getToken());
 		resultPD.put("user", user);
-		resultPD.put("state", "success");
-		return this.jsonContent(resultPD);
+		return this.jsonContent("success",resultPD);
 
 	}
 
@@ -69,8 +68,7 @@ public class LoginController extends BaseController {
 		TokenPool tokenPool=TokenPool.getInstance();
 		tokenPool.remove(token);
 		System.out.println("removeToken:"+token);
-		resultPD.put("state", "success");
-		return this.jsonContent(resultPD);
+		return this.jsonContent("success",resultPD);
 	}
 	
 	

@@ -8,7 +8,7 @@ import cn.zhangjingyao.entity.PageData;
 import org.springframework.beans.factory.annotation.Autowired;
 
 //@Service(interfaceClass = UserService.class)
-@Service
+@com.alibaba.dubbo.config.annotation.Service
 @org.springframework.stereotype.Service
 public class UserServiceImpl implements UserService {
 	
