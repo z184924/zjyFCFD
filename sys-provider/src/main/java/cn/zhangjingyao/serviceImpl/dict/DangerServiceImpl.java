@@ -5,6 +5,8 @@ import cn.zhangjingyao.entity.Page;
 import cn.zhangjingyao.entity.PageData;
 import cn.zhangjingyao.service.dict.DangerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -22,6 +24,7 @@ public class DangerServiceImpl implements DangerService {
 	 * @throws Exception
 	 */
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
 	public void save(PageData pd)throws Exception{
 		dao.save("DangerMapper.save", pd);
 	}
@@ -32,6 +35,7 @@ public class DangerServiceImpl implements DangerService {
 	 * @throws Exception
 	 */
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
 	public void save(List<PageData> list)throws Exception{
 		for (PageData pd:list) {
 			dao.save("DangerMapper.save", pd);
@@ -44,6 +48,7 @@ public class DangerServiceImpl implements DangerService {
 	 * @throws Exception
 	 */
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
 	public void delete(PageData pd)throws Exception{
 		dao.delete("DangerMapper.delete", pd);
 	}
@@ -54,6 +59,7 @@ public class DangerServiceImpl implements DangerService {
 	 * @throws Exception
 	 */
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
 	public void delete(List<PageData> list)throws Exception{
         for (PageData pd:list) {
 			dao.delete("DangerMapper.delete", pd);
@@ -66,6 +72,7 @@ public class DangerServiceImpl implements DangerService {
 	 * @throws Exception
 	 */
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
 	public void edit(PageData pd)throws Exception{
 		dao.update("DangerMapper.edit", pd);
 	}
@@ -76,6 +83,7 @@ public class DangerServiceImpl implements DangerService {
 	 * @throws Exception
 	 */
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
 	public void edit(List<PageData> list)throws Exception{
         for (PageData pd:list) {
 			dao.update("DangerMapper.edit", pd);
@@ -196,6 +204,7 @@ public class DangerServiceImpl implements DangerService {
 	 * @throws Exception
 	 */
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
 	public void deleteAll(String[] ArrayDATA_IDS)throws Exception{
 		dao.delete("DangerMapper.deleteAll", ArrayDATA_IDS);
 	}

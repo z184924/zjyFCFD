@@ -42,8 +42,11 @@ Configuration:
       AppenderRef:
         - ref: CONSOLE
         - ref: ROLLING_FILE
-    Logger: # 为cn.zhangjingyao.serviceImpl包配置特殊的Log级别，方便调试
-          - name: cn.zhangjingyao.serviceImpl
+    Logger: # 为部分包配置特殊的Log级别，方便调试
+          - name: org.springframework.jdbc
+          - name: org.apache.ibatis.logging.log4j2
+          - name: org.apache.ibatis.logging.jdbc
+          - name: org.mybatis
             additivity: false
             level: debug
             AppenderRef:

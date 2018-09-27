@@ -29,6 +29,7 @@ spring:
 　  connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
     #合并多个DruidDataSource的监控数据
 　　useGlobalDataSourceStat:
+
 #dubbo配置
 dubbo:
 #定义了提供方应用信息，用于计算依赖关系；在 dubbo-admin 或 dubbo-monitor 会显示这个名字，方便辨识
@@ -50,3 +51,9 @@ server:
 mybatis:
   mapper-locations: classpath:mapper/*/*.xml
   type-aliases-package: cn.zhangjingyao.entity
+  configuration:
+    cache-enabled: true
+    use-generated-keys: true
+    default-executor-type: reuse
+    jdbc-type-for-null: null
+    log-impl: org.apache.ibatis.logging.log4j2.Log4j2Impl

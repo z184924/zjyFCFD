@@ -42,10 +42,3 @@ Configuration:
       AppenderRef:
         - ref: CONSOLE
         - ref: ROLLING_FILE
-    Logger: # 为cn.zhangjingyao.serviceImpl包配置特殊的Log级别，方便调试
-          - name: cn.zhangjingyao.serviceImpl
-            additivity: false
-            level: debug
-            AppenderRef:
-              - ref: CONSOLE
-              - ref: ROLLING_FILE
