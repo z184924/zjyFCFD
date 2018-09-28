@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/sys-consumer/sys-consumer.iml" filepath="$PROJECT_DIR$/sys-consumer/sys-consumer.iml" />
       <module fileurl="file://$PROJECT_DIR$/sys-facade/sys-facade.iml" filepath="$PROJECT_DIR$/sys-facade/sys-facade.iml" />
       <module fileurl="file://$PROJECT_DIR$/sys-provider/sys-provider.iml" filepath="$PROJECT_DIR$/sys-provider/sys-provider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sys-provider-big/sys-provider-big.iml" filepath="$PROJECT_DIR$/sys-provider-big/sys-provider-big.iml" />
       <module fileurl="file://$PROJECT_DIR$/zjyFFD.iml" filepath="$PROJECT_DIR$/zjyFFD.iml" />
     </modules>
   </component>

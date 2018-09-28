@@ -18,6 +18,7 @@
         <module>sys-provider</module>
         <module>sys-facade</module>
         <module>sys-consumer</module>
+        <module>sys-provider-big</module>
     </modules>
 
     <parent>
@@ -70,6 +71,7 @@
                     <artifactId>log4j</artifactId>
                 </exclusion>
             </exclusions>
+            <scope>test</scope>
         </dependency>
         <!-- https://mvnrepository.com/artifact/com.101tec/zkclient -->
         <dependency>
@@ -89,6 +91,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
             <version>${spring-boot.version}</version>
+            <scope>test</scope>
         </dependency>
         <!--spring boot jdbc-->
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-jdbc -->
