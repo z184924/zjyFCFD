@@ -5,6 +5,8 @@ import cn.zhangjingyao.entity.Page;
 import cn.zhangjingyao.entity.PageData;
 import cn.zhangjingyao.service.dict.ProjectService;
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -86,12 +88,8 @@ public class ProjectController extends BaseController {
 	public Object getGridListJson() throws Exception {
 		logBefore(logger, "获取Project列表Json");
 		PageData pd = this.getPageData();
-		Page page = new Page();
-		page.setCurrentPage(pd.getInt("page"));
-		page.setShowCount(pd.getInt("rows"));
-		page.setPd(pd);
-		List<PageData> resultList = this.projectService.listPage(page);// 分页查询列表
-		return this.jsonContent("success",resultList, page);
+		PageInfo<PageData> pageInfo = this.projectService.listPage(pd);// 分页查询列表
+		return this.jsonContent("success",pageInfo);
 	}
 	/**
 	 * 返回列表JSON

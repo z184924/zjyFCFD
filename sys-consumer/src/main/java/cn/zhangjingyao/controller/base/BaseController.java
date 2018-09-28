@@ -6,6 +6,7 @@ import cn.zhangjingyao.entity.Page;
 import cn.zhangjingyao.entity.PageData;
 import cn.zhangjingyao.entity.system.User;
 import cn.zhangjingyao.util.*;
+import com.github.pagehelper.PageInfo;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
@@ -112,13 +113,10 @@ public class BaseController {
 	 * @param page 分页
 	 * @return
 	 */
-	public String jsonContent(String state, List<PageData> dataList, Page page) {
+	public String jsonContent(String state, PageInfo pageInfo) {
 		Map<String,Object> res= new HashMap<String, Object>();
 		res.put("state", state);
-		res.put("rows",dataList);
-		res.put("total",page.getTotalPage());
-		res.put("page",page.getCurrentPage());
-		res.put("records",page.getTotalResult());
+		res.put("PageInfo",pageInfo);
 		return JSON.toJSONString(res);
 	}
 

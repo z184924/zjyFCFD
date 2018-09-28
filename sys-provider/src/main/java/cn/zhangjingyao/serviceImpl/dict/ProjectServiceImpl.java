@@ -4,6 +4,8 @@ import cn.zhangjingyao.dao.DaoImpl;
 import cn.zhangjingyao.entity.Page;
 import cn.zhangjingyao.entity.PageData;
 import cn.zhangjingyao.service.dict.ProjectService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -81,15 +83,17 @@ public class ProjectServiceImpl implements ProjectService {
 		}
 	}
 
-    /**
-	 * 分页列表
-     * @param page
-     * @return
-     * @throws Exception
-     */
+	/**
+	 * 列表
+	 * @param page
+	 * @return
+	 * @throws Exception
+	 */
 	@Override
-	public List<PageData> listPage(Page page)throws Exception{
-		return (List<PageData>)dao.findForList("ProjectMapper.datalistPage", page);
+	public PageInfo<PageData> listPage(PageData pd)throws Exception{
+		PageHelper.startPage(pd.getInt("page"),pd.getInt("rows"));
+		List<PageData> forList = (List<PageData>) dao.findForList("ProjectMapper.listAll", pd);
+		return new PageInfo(forList);
 	}
 
     /**

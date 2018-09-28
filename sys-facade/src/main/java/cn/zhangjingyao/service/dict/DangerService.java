@@ -2,6 +2,7 @@ package cn.zhangjingyao.service.dict;
 
 import cn.zhangjingyao.entity.Page;
 import cn.zhangjingyao.entity.PageData;
+import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -55,11 +56,11 @@ public interface DangerService {
 
 	/**
 	 * 列表
-	 * @param page
+	 * @param pd
 	 * @return
 	 * @throws Exception
 	 */
-	public List<PageData> listPage(Page page)throws Exception;
+	public PageInfo<PageData> listPage(PageData pd)throws Exception;
 
 	/**
 	 * 列表(全部)
