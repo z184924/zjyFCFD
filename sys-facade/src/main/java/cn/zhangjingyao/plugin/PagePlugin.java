@@ -40,12 +40,13 @@ import java.util.Properties;
 * mybatis控件实现原理简要说明：
 * 利用mybatis的拦截器Interceptor对StatementHandler进行拦截，通过判断SQL语句是否包含".*listPage.*"，对包含的sql语句利用反射机制动态修改拼接SQL语句，将拼接的sql返回执行，查出分页数据；
  */
-@Intercepts({@Signature(type=StatementHandler.class,method="prepare",args={Connection.class})})   //拦截器签名
+@Intercepts({@Signature(type=StatementHandler.class,method="prepare",args={Connection.class, Integer.class})})   //拦截器签名
 public class PagePlugin implements Interceptor {
 
 	private static String dialect = "";	//数据库方言
 	private static String pageSqlId = ""; //mapper.xml中需要拦截的ID(正则匹配)
 
+	@Override
 	public Object intercept(Invocation ivk) throws Throwable {
 		// TODO Auto-generated method stub
 		if(ivk.getTarget() instanceof RoutingStatementHandler){
@@ -174,11 +175,13 @@ public class PagePlugin implements Interceptor {
 		}
 	}
 
+	@Override
 	public Object plugin(Object arg0) {
 		// TODO Auto-generated method stub
 		return Plugin.wrap(arg0, this);
 	}
 
+	@Override
 	public void setProperties(Properties p) {
 		dialect = p.getProperty("dialect");
 		if (Tools.isEmpty(dialect)) {
