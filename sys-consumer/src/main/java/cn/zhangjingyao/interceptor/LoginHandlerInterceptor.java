@@ -1,14 +1,14 @@
 package cn.zhangjingyao.interceptor;
 
+import cn.zhangjingyao.util.*;
 import com.alibaba.fastjson.JSON;
 import cn.zhangjingyao.entity.system.User;
-import cn.zhangjingyao.util.Const;
-import cn.zhangjingyao.util.Jurisdiction;
-import cn.zhangjingyao.util.Token;
-import cn.zhangjingyao.util.TokenPool;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +28,8 @@ import java.util.Map;
  */
 public class LoginHandlerInterceptor extends HandlerInterceptorAdapter {
 
+	@Autowired
+	private RedisTokenUtil redisTokenUtil;
 	//1.当preHandle方法返回false时，从当前拦截器往回执行所有拦截器的afterCompletion方法，再退出拦截器链。也就是说，请求不继续往下传了，直接沿着来的链往回跑。
 	//2.当preHandle方法全为true时，执行下一个拦截器,直到所有拦截器执行完。
 	//  再运行被拦截的Controller。然后进入拦截器链，运行所有拦截器的postHandle方法,完后从最后一个拦截器往回执行所有拦截器的afterCompletion方法.
@@ -40,29 +42,42 @@ public class LoginHandlerInterceptor extends HandlerInterceptorAdapter {
 			return true;
 		}else if (path.matches(Const.TOKEN_INTERCEPTOR_PATH)){	//判断是否采用Token验证
 			String tokenStr = request.getParameter("token");
-			TokenPool tokenPool = TokenPool.getInstance();
-			Token token = tokenPool.getToken(tokenStr);
-			if(token==null) {
+//			TokenPool tokenPool = TokenPool.getInstance();
+//			Token token = tokenPool.getToken(tokenStr);
+//			if(token==null) {
+//				Map<String,Object> res= new HashMap<String, Object>();
+//				res.put("state", "errorToken");
+//				res.put("message", "Error Token");
+//				String jsonString = JSON.toJSONString(res);
+//				this.writeJson(response, jsonString);
+//				return false;
+//			}else if(token.isExpiry()) {
+//				Map<String,Object> res= new HashMap<String, Object>();
+//				res.put("state", "errorToken");
+//				res.put("message", "Expiry Token");
+//				String jsonString = JSON.toJSONString(res);
+//				this.writeJson(response, jsonString);
+//				return false;
+//			}else {
+//				tokenPool.flushToken(tokenStr);
+//				return true;
+//			}
+			User user = redisTokenUtil.getToken(tokenStr);
+			if(user==null){
 				Map<String,Object> res= new HashMap<String, Object>();
 				res.put("state", "errorToken");
 				res.put("message", "Error Token");
 				String jsonString = JSON.toJSONString(res);
 				this.writeJson(response, jsonString);
 				return false;
-			}else if(token.isExpiry()) {
-				Map<String,Object> res= new HashMap<String, Object>();
-				res.put("state", "errorToken");
-				res.put("message", "Expiry Token");
-				String jsonString = JSON.toJSONString(res);
-				this.writeJson(response, jsonString);
-				return false;
-			}else {
-				tokenPool.flushToken(tokenStr);
+			}else{
+				redisTokenUtil.flushToken(tokenStr);
 				return true;
 			}
+
 		} else{
 			//shiro管理的session
-			Subject currentUser = SecurityUtils.getSubject();  
+			Subject currentUser = SecurityUtils.getSubject();
 			Session session = currentUser.getSession();
 			User user = (User)session.getAttribute(Const.SESSION_USER);
 			if(user!=null){
@@ -75,7 +90,7 @@ public class LoginHandlerInterceptor extends HandlerInterceptorAdapter {
 			}else{
 				//登陆过滤
 				response.sendRedirect(request.getContextPath() + Const.LOGIN);
-				return false;		
+				return false;
 				//return true;
 			}
 		}

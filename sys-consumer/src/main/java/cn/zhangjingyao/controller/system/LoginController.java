@@ -5,10 +5,12 @@ import cn.zhangjingyao.controller.base.BaseController;
 import cn.zhangjingyao.entity.system.User;
 import cn.zhangjingyao.service.system.user.UserService;
 import cn.zhangjingyao.entity.PageData;
+import cn.zhangjingyao.util.RedisTokenUtil;
 import cn.zhangjingyao.util.Token;
 import cn.zhangjingyao.util.TokenPool;
 import com.alibaba.dubbo.config.annotation.Reference;
 import org.apache.shiro.crypto.hash.SimpleHash;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,6 +23,8 @@ public class LoginController extends BaseController {
 
 	@Reference
 	private UserService userService;
+	@Autowired
+	private RedisTokenUtil redisTokenUtil;
 
 	/**
 	 * 用户登录
@@ -35,10 +39,11 @@ public class LoginController extends BaseController {
 //			return	this.jsonContent("error","license error");
 //		}
 		PageData pd = this.getPageData();
-		String password = new SimpleHash("SHA-1", pd.getString("account"), pd.getString("password")).toString();	//密码加密
+//		String password = new SimpleHash("SHA-1", pd.getString("account"), pd.getString("password")).toString();	//密码加密
 		PageData searchPd= new PageData();
 		searchPd.put("account",pd.getString("account"));
-		searchPd.put("password",password);
+//		searchPd.put("password",password);
+		searchPd.put("password",pd.getString("password"));
 		User user = this.userService.loginUser(searchPd);
 		if(user==null){
 			return this.jsonContent("error", "该用户不存在或密码错误");
@@ -49,6 +54,8 @@ public class LoginController extends BaseController {
 		tokenPool.addToken(token);
 		resultPD.put("token", token.getToken());
 		System.out.println("addToken:"+token.getToken());
+		String tokenStr = redisTokenUtil.addToken(user);
+		System.out.println("Redis addToken:"+tokenStr);
 		resultPD.put("user", user);
 		return this.jsonContent("success",resultPD);
 

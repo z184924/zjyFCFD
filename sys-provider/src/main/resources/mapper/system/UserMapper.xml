@@ -21,8 +21,8 @@
 		SELECT *
 		FROM sys_user
 		WHERE 1=1
-		AND USERNAME = #{account}
-		AND PASSWORD = #{password}
+		AND account = #{account}
+		AND password = #{password}
 	</select>
 	
 	<!-- 分页查询 -->
