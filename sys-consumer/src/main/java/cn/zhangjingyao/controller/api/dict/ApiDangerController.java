@@ -20,7 +20,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping(value="/api/danger")
-public class DangerController extends BaseController {
+public class ApiDangerController extends BaseController {
 
 	@Reference
 	private DangerService dangerService;

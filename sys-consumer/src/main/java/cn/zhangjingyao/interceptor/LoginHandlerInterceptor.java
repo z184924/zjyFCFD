@@ -9,10 +9,13 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -76,17 +79,10 @@ public class LoginHandlerInterceptor extends HandlerInterceptorAdapter {
 			}
 
 		} else{
-			//shiro管理的session
-			Subject currentUser = SecurityUtils.getSubject();
-			Session session = currentUser.getSession();
+			HttpSession session = request.getSession();
 			User user = (User)session.getAttribute(Const.SESSION_USER);
 			if(user!=null){
-				path = path.substring(1, path.length());
-				boolean b = Jurisdiction.hasJurisdiction(path);
-				if(!b){
-					response.sendRedirect(request.getContextPath() + Const.LOGIN);
-				}
-				return b;
+				return true;
 			}else{
 				//登陆过滤
 				response.sendRedirect(request.getContextPath() + Const.LOGIN);

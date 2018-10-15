@@ -6,23 +6,18 @@
 	<!-- 将vo实体类转换为映射文件 ，因为在mybatis-config的配置文件中已经用了别名，因此这里可以这样写：type="User"-->
 	
 	<resultMap type="cn.zhangjingyao.entity.system.User" id="userResultMap">
-		<id column="USER_ID" property="userId"/>
-		<result column="USERNAME" property="userName"/>
-		<result column="PASSWORD" property="password"/>
-		<result column="NAME" property="name"/>
-		<result column="COMPANY_ID" property="companyId"/>
-		<result column="ISADMIN" property="isAdmin"/>
-		<result column="SORTNUM" property="sortNum"/>
-		<result column="LAST_LOGIN" property="lastLogin"/>
-		<result column="STATE" property="state"/>
+		<id column="userId" property="userId"/>
+		<result column="account" property="account"/>
+		<result column="password" property="password"/>
+		<result column="userName" property="userName"/>
 	</resultMap>
 
 	<select id="loginUser" parameterType="PageData" resultMap="userResultMap" useCache="false">
 		SELECT *
 		FROM sys_user
 		WHERE 1=1
-		AND account = #{account}
-		AND password = #{password}
+		AND account = #{account,jdbcType=VARCHAR}
+		AND password = #{password,jdbcType=VARCHAR}
 	</select>
 	
 	<!-- 分页查询 -->

@@ -2,18 +2,15 @@ package cn.zhangjingyao.controller.system;
 
 
 import cn.zhangjingyao.controller.base.BaseController;
+import cn.zhangjingyao.entity.PageData;
 import cn.zhangjingyao.entity.system.User;
 import cn.zhangjingyao.service.system.user.UserService;
-import cn.zhangjingyao.entity.PageData;
-import cn.zhangjingyao.util.RedisTokenUtil;
-import cn.zhangjingyao.util.Token;
-import cn.zhangjingyao.util.TokenPool;
+import cn.zhangjingyao.util.Const;
 import com.alibaba.dubbo.config.annotation.Reference;
-import org.apache.shiro.crypto.hash.SimpleHash;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpSession;
 
 /*
  * 总入口
@@ -23,8 +20,6 @@ public class LoginController extends BaseController {
 
 	@Reference
 	private UserService userService;
-	@Autowired
-	private RedisTokenUtil redisTokenUtil;
 
 	/**
 	 * 用户登录
@@ -32,9 +27,8 @@ public class LoginController extends BaseController {
 	 * @param password String,密码
 	 * @return token:令牌，user:用户信息，state:状态码
 	 */
-	@RequestMapping(value="/login" ,produces="application/json;charset=UTF-8")
-	@ResponseBody
-	public Object login()throws Exception{
+	@RequestMapping(value="/login")
+	public String login()throws Exception{
 //		if(License.licenseCheck()==false){
 //			return	this.jsonContent("error","license error");
 //		}
@@ -46,37 +40,35 @@ public class LoginController extends BaseController {
 		searchPd.put("password",pd.getString("password"));
 		User user = this.userService.loginUser(searchPd);
 		if(user==null){
-			return this.jsonContent("error", "该用户不存在或密码错误");
+			return "/html/login";
+		}else{
+			HttpSession session = this.getSession();
+			session.setAttribute(Const.SESSION_USER, user);
+			PageData resultPd=new PageData();
+			resultPd.put("user",user);
+			return "/error/404";
 		}
-		PageData resultPD=new PageData();
-		TokenPool tokenPool= TokenPool.getInstance();
-		Token token = new Token(user);
-		tokenPool.addToken(token);
-		resultPD.put("token", token.getToken());
-		System.out.println("addToken:"+token.getToken());
-		String tokenStr = redisTokenUtil.addToken(user);
-		System.out.println("Redis addToken:"+tokenStr);
-		resultPD.put("user", user);
-		return this.jsonContent("success",resultPD);
-
 	}
 
 	/**
 	 * 注销
-	 * @param token String,需要注销的token
+	 * @param token String,需要注销的session
 	 * @return state:注销状态
 	 */
-	@ResponseBody
-	@RequestMapping(value="/logout" ,produces="application/json;charset=UTF-8")
+	@RequestMapping(value="/logout")
 	public String logout()throws Exception{
-		PageData pd = this.getPageData();
-		String token = pd.getString("token");
-		PageData resultPD=new PageData();
-		TokenPool tokenPool=TokenPool.getInstance();
-		tokenPool.remove(token);
-		System.out.println("removeToken:"+token);
-		return this.jsonContent("success",resultPD);
+		this.getSession().invalidate();
+		return "/html/login";
 	}
-	
-	
+
+	/**
+	 * 前往用户登录页
+	 * @param username String,用户名
+	 * @param password String,密码
+	 * @return token:令牌，user:用户信息，state:状态码
+	 */
+	@RequestMapping(value="/login_toLogin")
+	public String toLogin()throws Exception{
+		return "/html/login";
+	}
 }

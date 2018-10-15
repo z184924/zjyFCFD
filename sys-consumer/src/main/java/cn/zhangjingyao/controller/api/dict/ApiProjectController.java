@@ -19,7 +19,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping(value="/api/project")
-public class ProjectController extends BaseController {
+public class ApiProjectController extends BaseController {
 
 	@Reference
 	private ProjectService projectService;

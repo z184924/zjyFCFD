@@ -7,19 +7,22 @@ import cn.zhangjingyao.entity.PageData;
 import cn.zhangjingyao.entity.system.User;
 import cn.zhangjingyao.util.*;
 import com.github.pagehelper.PageInfo;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.session.Session;
-import org.apache.shiro.subject.Subject;
+import org.apache.catalina.Session;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class BaseController {
+
+	@Autowired
+	protected RedisTokenUtil redisTokenUtil;
 
 	protected Logger logger = Logger.getLogger(this.getClass());
 
@@ -48,11 +51,23 @@ public class BaseController {
 
 		return request;
 	}
+	/**
+	 * 得到session对象
+	 */
+	public HttpSession getSession() {
+		HttpServletRequest request = getRequest();
+		HttpSession session = request.getSession();
+		return session;
+	}
 
 	public User getCurrentUser() {
-		Subject subject = SecurityUtils.getSubject();
-		Session session = subject.getSession();
+		HttpSession session = getSession();
 		User currentUser = (User)session.getAttribute(Const.SESSION_USER);
+		if(currentUser==null){
+			PageData pd = this.getPageData();
+			String tokenStr = pd.getString("token");
+			currentUser = redisTokenUtil.getToken(tokenStr);
+		}
 		return (currentUser == null ? new User() : currentUser);
 	}
 
