@@ -46,7 +46,7 @@ public class LoginController extends BaseController {
 			session.setAttribute(Const.SESSION_USER, user);
 			PageData resultPd=new PageData();
 			resultPd.put("user",user);
-			return "/error/404";
+			return "/html/index";
 		}
 	}
 
@@ -63,12 +63,17 @@ public class LoginController extends BaseController {
 
 	/**
 	 * 前往用户登录页
-	 * @param username String,用户名
-	 * @param password String,密码
-	 * @return token:令牌，user:用户信息，state:状态码
 	 */
 	@RequestMapping(value="/login_toLogin")
 	public String toLogin()throws Exception{
 		return "/html/login";
+	}
+
+	/**
+	 * 前往用户index页
+	 */
+	@RequestMapping(value="/index")
+	public String toIndex()throws Exception{
+		return "/html/index";
 	}
 }
