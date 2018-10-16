@@ -20,6 +20,7 @@ public class startFilter extends BaseController implements Filter {
 	/**
 	 * 初始化
 	 */
+    @Override
     public void init(FilterConfig fc) throws ServletException {
 //		this.startWebsocketInstantMsg();
 //		this.startWebsocketOnline();
@@ -79,7 +80,8 @@ public class startFilter extends BaseController implements Filter {
 
 		ScheduledExecutorService scheduledExecutorService = new ScheduledThreadPoolExecutor(1);
 		scheduledExecutorService.scheduleAtFixedRate(new Runnable() {
-			public void run() {
+			@Override
+            public void run() {
 
 				//PersonService personService = (PersonService)ApplicationContext.getBean("personService");
 
@@ -90,12 +92,14 @@ public class startFilter extends BaseController implements Filter {
 	}
 
 
+    @Override
     public void destroy() {
 		// TODO Auto-generated method stub
 		
 	}
 
 
+    @Override
     public void doFilter(ServletRequest arg0, ServletResponse arg1,
                          FilterChain arg2) throws IOException, ServletException {
 		// TODO Auto-generated method stub

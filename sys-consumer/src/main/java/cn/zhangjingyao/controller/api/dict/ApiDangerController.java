@@ -33,7 +33,7 @@ public class ApiDangerController extends BaseController {
 	public String saveOrUpdate() throws Exception{
 		logBefore(logger, "新增或编辑Project");
 		PageData pd = this.getPageData();
-		if(pd.get("id")==null||pd.get("id").equals("")) {
+		if(pd.get("id")==null|| "".equals(pd.get("id"))) {
 			pd.put("id", this.get32UUID()); // 主键
 			this.dangerService.save(pd);
 		}else {
@@ -238,7 +238,7 @@ public class ApiDangerController extends BaseController {
 					}
 				}
 				for(PageData areaCountData:areaCountList){
-					if(legend.equals("总计")&&yAxis.equals(areaCountData.getString("area"))){
+					if("总计".equals(legend) &&yAxis.equals(areaCountData.getString("area"))){
 						data.add(areaCountData.getInt("counts"));
 					}
 				}

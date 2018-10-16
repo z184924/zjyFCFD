@@ -32,7 +32,7 @@ public class ApiProjectController extends BaseController {
 	public String saveOrUpdate() throws Exception{
 		logBefore(logger, "新增或编辑Project");
 		PageData pd = this.getPageData();
-		if(pd.get("id")==null||pd.get("id").equals("")) {
+		if(pd.get("id")==null|| "".equals(pd.get("id"))) {
 			pd.put("id", this.get32UUID()); // 主键
 			this.projectService.save(pd);
 		}else {

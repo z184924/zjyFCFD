@@ -44,7 +44,7 @@ public class SmsUtil {
 	    String account = "", password = "";
 	    String strSMS1 = Tools.readTxtFile(Const.SMS1);			//读取短信1配置
 		if(null != strSMS1 && !"".equals(strSMS1)){
-			String strS1[] = strSMS1.split(",fh,");
+            String[] strS1 = strSMS1.split(",fh,");
 			if(strS1.length == 2){
 				account = strS1[0];
 				password = strS1[1];
@@ -141,7 +141,7 @@ public class SmsUtil {
 	    String account = "", password = "";
 	    String strSMS2 = Tools.readTxtFile(Const.SMS2);			//读取短信2配置
 		if(null != strSMS2 && !"".equals(strSMS2)){
-			String strS2[] = strSMS2.split(",fh,");
+            String[] strS2 = strSMS2.split(",fh,");
 			if(strS2.length == 2){
 				account = strS2[0];
 				password = strS2[1];

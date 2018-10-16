@@ -32,7 +32,7 @@ public class Jurisdiction {
 		List<Menu> menuList = (List)session.getAttribute(Const.SESSION_allmenuList); //获取菜单列表
 		
 		//登陆首页菜单权限处理
-		if(menuList == null && (menuUrl.equals("main/index") || menuUrl.equals("main/Workbench"))){
+		if(menuList == null && ("main/index".equals(menuUrl) || "main/Workbench".equals(menuUrl))){
 			return true;
 		}
 		
