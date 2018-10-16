@@ -37,6 +37,7 @@ public class MyExceptionResolver implements HandlerExceptionResolver {
 		
 		System.out.println("==============异常开始=============");
 		ex.printStackTrace();
+		request.setAttribute("errorLog",ex.toString());
 		System.out.println("==============异常结束=============");
 		response.setCharacterEncoding("UTF-8");
 		if (!(request.getHeader("accept").contains("application/json") || (request.getHeader("X-Requested-With") != null

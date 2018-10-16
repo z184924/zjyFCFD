@@ -1,13 +1,17 @@
 package cn.zhangjingyao.config;
 
 import cn.zhangjingyao.interceptor.LoginHandlerInterceptor;
+import cn.zhangjingyao.resolver.MyExceptionResolver;
 import cn.zhangjingyao.util.Const;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
+import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
+import java.util.List;
 
 @Configuration
 public class InterceptorConfiguration extends WebMvcConfigurerAdapter {
@@ -36,6 +40,12 @@ public class InterceptorConfiguration extends WebMvcConfigurerAdapter {
         registry.addViewController("/").setViewName("forward:/"+ Const.LOGIN);
         registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
         super.addViewControllers(registry);
+    }
+
+    @Override
+    public void configureHandlerExceptionResolvers(List<HandlerExceptionResolver> exceptionResolvers) {
+        super.configureHandlerExceptionResolvers(exceptionResolvers);
+        exceptionResolvers.add(new MyExceptionResolver());
     }
 
 }
