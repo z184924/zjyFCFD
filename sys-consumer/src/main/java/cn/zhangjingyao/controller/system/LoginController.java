@@ -40,13 +40,13 @@ public class LoginController extends BaseController {
 		searchPd.put("password",pd.getString("password"));
 		User user = this.userService.loginUser(searchPd);
 		if(user==null){
-			return "/html/login";
+			return "html/login";
 		}else{
 			HttpSession session = this.getSession();
 			session.setAttribute(Const.SESSION_USER, user);
 			PageData resultPd=new PageData();
 			resultPd.put("user",user);
-			return "/html/index";
+			return "html/index";
 		}
 	}
 
@@ -58,7 +58,7 @@ public class LoginController extends BaseController {
 	@RequestMapping(value="/logout")
 	public String logout()throws Exception{
 		this.getSession().invalidate();
-		return "/html/login";
+		return "html/login";
 	}
 
 	/**
@@ -66,7 +66,7 @@ public class LoginController extends BaseController {
 	 */
 	@RequestMapping(value="/login_toLogin")
 	public String toLogin()throws Exception{
-		return "/html/login";
+		return "html/login";
 	}
 
 	/**
@@ -74,6 +74,6 @@ public class LoginController extends BaseController {
 	 */
 	@RequestMapping(value="/index")
 	public String toIndex()throws Exception{
-		return "/html/index";
+		return "html/index";
 	}
 }

@@ -37,7 +37,7 @@ public class InterceptorConfiguration extends WebMvcConfigurerAdapter {
      */
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("forward:/"+ Const.LOGIN);
+        registry.addViewController("/").setViewName(Const.LOGIN);
         registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
         super.addViewControllers(registry);
     }
