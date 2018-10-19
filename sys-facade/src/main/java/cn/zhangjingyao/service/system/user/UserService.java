@@ -4,6 +4,8 @@ import cn.zhangjingyao.entity.system.User;
 import cn.zhangjingyao.entity.PageData;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public interface UserService {
 
@@ -14,6 +16,10 @@ public interface UserService {
 	 * @throws Exception
 	 */
 	public User loginUser(PageData pd)throws Exception;
+
+	public void save(PageData pd)throws Exception;
+
+	public void save(List<PageData> list)throws Exception;
 
 
 }
