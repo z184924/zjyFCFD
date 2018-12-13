@@ -9,11 +9,11 @@
 	<packaging>jar</packaging>
 
 	<name>sys-consumer</name>
-	<description>System consumer for zjy fast framework demo</description>
+	<description>System consumer for zjy fast cloud framework demo</description>
 
 	<parent>
 		<groupId>cn.zhangjingyao</groupId>
-		<artifactId>zjyFFD</artifactId>
+		<artifactId>zjyFCFD</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 

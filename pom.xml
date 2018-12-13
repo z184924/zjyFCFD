@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>cn.zhangjingyao</groupId>
-    <artifactId>zjyFFD</artifactId>
+    <artifactId>zjyFCFD</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
 
-    <description>zjy fast framework demo</description>
+    <description>zjy fast cloud framework demo</description>
     <properties>
         <spring-boot.version>1.5.13.RELEASE</spring-boot.version>
     </properties>
