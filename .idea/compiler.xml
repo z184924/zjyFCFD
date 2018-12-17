@@ -17,6 +17,7 @@
       <module name="sys-facade" target="1.6" />
       <module name="sys-provider" target="1.8" />
       <module name="sys-provider-big" target="1.6" />
+      <module name="zjyFCFD" target="1.6" />
       <module name="zjyFFD" target="1.6" />
     </bytecodeTargetLevel>
   </component>

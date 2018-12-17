@@ -14,14 +14,14 @@
 
 	<select id="loginUser" parameterType="PageData" resultMap="userResultMap" useCache="false">
 		SELECT *
-		FROM sys_user
+		FROM user
 		WHERE 1=1
 		AND account = #{account,jdbcType=VARCHAR}
 		AND password = #{password,jdbcType=VARCHAR}
 	</select>
 	
 	<insert id="save" parameterType="PageData">
-		INSERT INTO sys_user
+		INSERT INTO user
 		(
 			account,
 			password,
